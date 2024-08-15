@@ -32,16 +32,16 @@ jobs:
         run: |
           if [[ ${{ github.ref_name }} == 'production' ]]; then
             echo "Loading production environment"
-            cp env.production .env
+            cp environment/env.production .env
           elif [[ ${{ github.ref_name }} == 'staging' ]]; then
             echo "Loading staging environment"
-            cp env.staging .env
+            cp environment/env.staging .env
           elif [[ ${{ github.ref_name }} == 'develop' ]]; then
             echo "Loading development environment"
-            cp env.development .env
+            cp environment/env.development .env
           else
             echo "Loading default environment"
-            cp env.default .env
+            cp environment/env.default .env
           fi
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
