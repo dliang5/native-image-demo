@@ -15,3 +15,28 @@ jobs:
     steps:
       - run: |
           echo The PR was successfully merged.
+      # this is the actual code im working with
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+      - run: java -version
+      - name: Building native image
+        run: |
+          ./gradlew dockerBuildNative
+
+      # before running this setup the artifact and where it is being pushed
+      - name: Pushing native image to repo
+        run: |
+          ./gradlew dockerPushNative 
+
+      - name: Deploying native artifact to GKE
+        run: |
+          echo 'deploying... to GKE somehow'
+
+      - run: echo "🍏 This job's status is ${{ job.status }}."

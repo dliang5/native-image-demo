@@ -27,8 +27,5 @@ jobs:
           java-version: '17'
           cache: 'gradle'
       - run: java -version
-      - name: Building native image
-        run: |
-          ./gradlew dockerBuildNative
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
