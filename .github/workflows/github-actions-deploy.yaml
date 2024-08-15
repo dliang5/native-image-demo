@@ -1,0 +1,17 @@
+on:
+  pull_request:
+    branches:
+      - develop
+      - staging # probably never hitting this up but for mainstream purpose
+      - production
+    types:
+      - closed
+
+# Later, in the jobs section of your actions.yml file.
+jobs:
+  if_merged:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo The PR was successfully merged.
