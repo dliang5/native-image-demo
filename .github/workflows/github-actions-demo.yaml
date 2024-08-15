@@ -27,5 +27,21 @@ jobs:
           java-version: '17'
           cache: 'gradle'
       - run: java -version
+
+      - name: Load Environment Variables
+        run: |
+          if [[ ${{ github.ref_name }} == 'production' ]]; then
+            echo "Loading production environment"
+            cp env.production .env
+          elif [[ ${{ github.ref_name }} == 'staging' ]]; then
+            echo "Loading staging environment"
+            cp env.staging .env
+          elif [[ ${{ github.ref_name }} == 'develop' ]]; then
+            echo "Loading development environment"
+            cp env.development .env
+          else
+            echo "Loading default environment"
+            cp env.default .env
+          fi
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
