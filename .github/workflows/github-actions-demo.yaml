@@ -16,8 +16,12 @@ jobs:
         run: |
           ls ${{ github.workspace }}
 
+      # this is the actual code im working with
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Setup JDK 17
-        uses: actions/setup-java@4
+        uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
